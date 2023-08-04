@@ -34,18 +34,21 @@ O Component Instance retorna um React Element.
 
 ## Render Triggering -> Render Phase -> Commit Phase -> Browser Paint
 
-- **RENDER TRIGGERING** <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/reactjs_logo_icon_170805.png">
+- **RENDER TRIGGERING** <img src="https://github.com/rafael-saraiva-mielczarski/React-Course/assets/100975439/3c2eee2f-f10b-4087-a497-edeffbda14e5512/reactjs_logo_icon_170805.png" width="60">
 
 Como é a fase inicial, o ativamento da renderização é o que inicia o processo. Essa *ativação só se da de duas formas*, uma quando a aplicação é inicializada, **Initial Render**, e outra quando tem algum **update no estado** de algum componente. 
 Esse processo, apesar de não parecer, é ativado em todo a arvore de componentes de aplicação, porém só altera o que for necessário e relativo ao estado alterado.
 
-- **RENDER PHASE**
+- **RENDER PHASE** <img src="https://github.com/rafael-saraiva-mielczarski/React-Course/assets/100975439/3c2eee2f-f10b-4087-a497-edeffbda14e5512/reactjs_logo_icon_170805.png" width="60">
+
 Ativados após alguma mudança de estado, a fase de renderização é iniciada. Quando o *arvore de componentes* é criada, também é criado uma *arvore de React Elements*, conhecida como "Virtual DOM", e quando ocorre a alteração de estado em um componente, a arvore de React Elements atualiza todos os componentes filhos do componente que foi mutado. Feito isso, acontece o processo de **Reconciliação**, onde ele possibilita que o DOM não seja todo recarregado na mudança de estado, somente a parte que nos interessa. O reconciliador usado pelo React é o **Fiber**, esse possui uma *arvore Fiber*, algo interno que possui todas as instancias de componentes e os elementos DOM e que não é recriado em cada re-renderização.
 No final, quando ocorre uma mudança de estado, a nova *arvore de React Elements* é comparada com a *arvore inicial do Fiber* e é feito o processo de **Reconciliação e Diffing**, resultando em uma *arvore fiber atualizada*, a qual passa somente os elementos da DOM que precisam ser realmente alterados, dentro de uma *Lista de Efeitos* ou lista de updates da DOM, que será utilizada na próxima fase do processo de renderização.
 
-- **COMMIT PHASE**
+- **COMMIT PHASE** <img src="https://github.com/rafael-saraiva-mielczarski/React-Course/assets/100975439/3c7098ba-c4e7-44c8-99af-f130b422df21" width="60">
+
 Nesse fase, o React escreve para o DOM todas as alterações necessárias, pegadas da *Lista de Efeitos* que foi o resultado da ultima fase. Essa etapa ocorre sincronamente, atualizando o DOM todo de uma vez só, assegurando que o DOM nunca vai mostrar uma UI parcialmente ou inconsistente. Esse é o **grande trunfo da fase de Renderização**, *poder fazer todas as atualizações necessárias a DOM de maneira asincrona e retornando como resposta tudo de uma vez só*, por isso que ocorre a separação entre essas duas fases.
 Então, após completa essa fase, a *arvore Fiber atualizada*, que foi utilizada para passar os updates da DOM, se torna a *arvore Fiber base* para o próximo ciclo de renderização, econimizando muito tempo e trabalho no processo. 
 
-- **BROWSER PAINT**
+- **BROWSER PAINT** <img src="https://github.com/rafael-saraiva-mielczarski/React-Course/assets/100975439/64e71729-2968-435d-af1b-3f6f77039189" width="80">
+
 Após receber as atualizações no DOM da fase passada, o navegador percebe isso e altera a UI conforme o que foi pedido.
