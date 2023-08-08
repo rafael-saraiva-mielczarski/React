@@ -60,3 +60,16 @@ Após receber as atualizações no DOM da fase passada, o navegador percebe isso
 ##**Key Prop**
 
 Muito importante para que o processo de renderização e diffing consigam identificar as instaâncias de componentes unicamente. Ele é muito usado em listas para diferenciar as instâncias e também ajuda na tarefa de re-renderização, avisando, caso algum novo item seja adicionado a uma lista, que ele não renderize toda a lista novamente e apenas renderize o novo item. O *Key* também pode ser usado para resetar o estado das instâncias dos componentes também.
+
+<hr />
+
+##**COMPONENT LIFE CYCLE**
+
+- **Mount / Initial Render**
+Quando a instância do componente é renderizada pela primeira vez, o novo estado e props do mesmo são todos criados
+
+- **Re-Render**
+Vai acontecer quando tiver alguma alteração na instância do componente, sendo essa uma mudança de estado, props, re-renderização de um componente pai ou mudança de contexto. Essa fase pode ou não acontecer.
+
+- **Unmount**
+Quando a instância do componete não é mais necessária ela "morre", destruindo o componente e seu estado ou props relativos. Isso pode acontecer quando mudamos de tela ou quando a aplicação é fechada.
