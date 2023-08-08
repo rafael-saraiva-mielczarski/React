@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Box from "./layout/Box";
 import Header from "./components/Header/Header";
 import NumResults from "./components/Header/NumResults";
@@ -58,20 +58,8 @@ const KEY = "f2ca383d";
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
-  const query = "Interstellar";
 
-  //useEffect é um hook para selecionar quando um effect tem que ocorrer, só seta o Movies quando o componente é iniciliazado
-  useEffect(function () {
-    async function fetchMovies() {
-      const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-      );
-      const data = await res.json();
-      setMovies(data.Search);
-      console.log(data.Search);
-    }
-    fetchMovies();
-  }, []);
+  //Component Composition, criar componentes que sirvam como layout ou para resolver problemas de prop drilling, basicamente é a mesma funcionalidade que o children tem em algum componente reutilizavel, só que inves de passar um texto ou apenas algo que mude, voce só cria um componente que vai ser padrao, o pai, e altera o conteudo que vai dentro dele passando um componente filho
 
   return (
     <>
