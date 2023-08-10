@@ -42,13 +42,16 @@ export default function App() {
   useEffect(() => {
     //como o useEffeect vai rodar no mount da instância do componente, é recomendado usar o async await para que não fique travado o app esperando uma resposta da Api
 
+    const controller = new AbortController();
+
     async function fetchMovies() {
       // como o estado de query foi adicionado no dependency array o effect esta sincronizado com esse estado, ou seja, toda vez que o estado de query mudar, o effect sera rodado novamente
       try {
         setIsLoading(true);
         setError("");
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+          { signal: controller.signal }
         );
         if (!res.ok)
           throw new Error("Something went wrong with fetching movies");
@@ -57,8 +60,12 @@ export default function App() {
         if (data.Response === "False") throw new Error("Movie not Found");
 
         setMovies(data.Search);
+        setError("");
       } catch (err) {
-        setError(err.message);
+        console.log(err.message);
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -69,6 +76,10 @@ export default function App() {
       return;
     }
     fetchMovies();
+
+    return function () {
+      controller.abort();
+    };
   }, [query]);
 
   function handleSelectMovie(id) {
