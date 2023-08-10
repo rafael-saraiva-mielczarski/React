@@ -60,6 +60,17 @@ export default function SelectedMovieDetails({
     getMovieDetails();
   }, [selectedId]);
 
+  useEffect(() => {
+    if (!title) return;
+    document.title = `Movie | ${title}`;
+
+    //Clean Up function, retorna uma função opicional no effect para limpar o estado caso o mesmo continue acontecendo mesmo após uma mudança de estado ou um unmount do componente.
+    //Nesse caso, ela é necessaria pois quando o filme é selecionado ele atualiza o titulo da página, porém quando se sai do componente onde o filme estava selecionado, o titulo pagina não volta para seu valor inicial, ele continua com o mesmo nome
+    return function () {
+      document.title = "usePopcorn";
+    };
+  }, [title]);
+
   return (
     <div className="details">
       {isLoading ? (
