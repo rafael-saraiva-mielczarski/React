@@ -3,9 +3,21 @@ import StarRating from "./StarRating";
 import Loader from "./Loader";
 const KEY = "f2ca383d";
 
-export default function SelectedMovieDetails({ selectedId, onCloseMovie }) {
+export default function SelectedMovieDetails({
+  selectedId,
+  onCloseMovie,
+  onAddWatchedMovie,
+  watched,
+}) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState(0);
+  const isMovieWatched = watched
+    .map((movie) => movie.imdbId)
+    .includes(selectedId);
+  const watchedMovieUserRating = watched.find(
+    (movie) => movie.imdbId === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -19,6 +31,21 @@ export default function SelectedMovieDetails({ selectedId, onCloseMovie }) {
     Director: director,
     Genre: genre,
   } = movie;
+
+  function handleAdd() {
+    const newWatchedMovie = {
+      imdbId: selectedId,
+      title,
+      year,
+      poster,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+      userRating,
+    };
+
+    onAddWatchedMovie(newWatchedMovie);
+    onCloseMovie();
+  }
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -60,7 +87,25 @@ export default function SelectedMovieDetails({ selectedId, onCloseMovie }) {
 
           <section>
             <div className="rating">
-              <StarRating maxRating={10} size={24} />
+              {!isMovieWatched ? (
+                <>
+                  <StarRating
+                    maxRating={10}
+                    size={24}
+                    onSetRating={setUserRating}
+                  />
+                  {userRating > 0 && (
+                    <button className="btn-add" onClick={handleAdd}>
+                      + Add to list
+                    </button>
+                  )}
+                </>
+              ) : (
+                <p>
+                  You rated this movie a {watchedMovieUserRating}
+                  <span>⭐️</span>
+                </p>
+              )}
             </div>
 
             <p>
