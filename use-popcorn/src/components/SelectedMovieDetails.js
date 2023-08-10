@@ -71,6 +71,21 @@ export default function SelectedMovieDetails({
     };
   }, [title]);
 
+  //keypress event, o useEffect é um "escape" para lidar com eventos DOM  de teclado, por isso tem que ser usado para lidar com eventos de teclado
+  useEffect(() => {
+    function callback(e) {
+      if (e.code === "Escape") {
+        onCloseMovie();
+      }
+    }
+
+    document.addEventListener("keydown", callback);
+
+    return function () {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [onCloseMovie]);
+
   return (
     <div className="details">
       {isLoading ? (
