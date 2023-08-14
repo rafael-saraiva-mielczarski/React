@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
 const KEY = "f2ca383d";
@@ -12,6 +12,13 @@ export default function SelectedMovieDetails({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
+
+  const countRef = useRef(0);
+  //aqui conseguimos pegar quantos cliques o usuario deu antes de realizar a ação de avaliar o filme, só conseguimos fazer isso com o useRef. Ele persiste o dado durante renderizações e não re-renderiza o componente com a mudança de estado dele.
+  useEffect(() => {
+    if (userRating) countRef.current = countRef.current + 1;
+  }, [userRating]);
+
   const isMovieWatched = watched
     .map((movie) => movie.imdbId)
     .includes(selectedId);
@@ -41,6 +48,7 @@ export default function SelectedMovieDetails({
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      countRatingDecisions: countRef.current,
     };
 
     onAddWatchedMovie(newWatchedMovie);

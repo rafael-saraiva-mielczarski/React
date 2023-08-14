@@ -118,7 +118,11 @@ export default function App() {
   return (
     <>
       <Header>
-        <SearchBar query={query} onChange={(e) => setQuery(e.target.value)} />
+        <SearchBar
+          query={query}
+          setQuery={setQuery}
+          onChange={(e) => setQuery(e.target.value)}
+        />
         <NumResults movies={movies} />
       </Header>
       <main className="main">
