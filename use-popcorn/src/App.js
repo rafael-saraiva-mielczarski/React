@@ -15,10 +15,37 @@ const KEY = "f2ca383d";
 export default function App() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectId] = useState(null);
+
+  //Lazy initial State
+  //passar uma funcão no valor do useState é possivel, porém não pode passar nenhum argumento dentro dela, aqui pegamos os filmes salvos no local storage.
+  //Como esse valor só sera importante quando entrarmos na página, ele é apropiado para receber esse tipo de função, visto que ele acaba não sendo afetado em nenhuma re-renderização.
+  const [watched, setWatched] = useState(() => {
+    const storedMovies = localStorage.getItem("watched");
+    return JSON.parse(storedMovies);
+  });
+
+  function handleSelectMovie(id) {
+    setSelectId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectId(null);
+  }
+
+  function handleAddWatchedMovie(movie) {
+    setWatched((watched) => [...watched, movie]);
+    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
+  }
+
+  function handleDeleteWatchedMovie(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+  }
+
+  // ===================================== useEffect ==============================================
+  // explicações e exemplos
 
   //   useEffect(() => {
   // como o dependency array esta vazio, só renderiza uma vez quando o componente é inicializado
@@ -83,21 +110,10 @@ export default function App() {
     };
   }, [query]);
 
-  function handleSelectMovie(id) {
-    setSelectId((selectedId) => (id === selectedId ? null : id));
-  }
-
-  function handleCloseMovie() {
-    setSelectId(null);
-  }
-
-  function handleAddWatchedMovie(movie) {
-    setWatched((watched) => [...watched, movie]);
-  }
-
-  function handleDeleteWatchedMovie(id) {
-    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
-  }
+  //adicionando filmes ao LS, para persistir os dados
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
 
   return (
     <>
