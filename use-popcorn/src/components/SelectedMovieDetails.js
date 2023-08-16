@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
+import { useKey } from "../hooks/useKey";
 const KEY = "f2ca383d";
 
 export default function SelectedMovieDetails({
@@ -55,6 +56,8 @@ export default function SelectedMovieDetails({
     onCloseMovie();
   }
 
+  useKey("Escape", onCloseMovie);
+
   useEffect(() => {
     async function getMovieDetails() {
       setIsLoading(true);
@@ -78,21 +81,6 @@ export default function SelectedMovieDetails({
       document.title = "usePopcorn";
     };
   }, [title]);
-
-  //keypress event, o useEffect é um "escape" para lidar com eventos DOM  de teclado, por isso tem que ser usado para lidar com eventos de teclado
-  useEffect(() => {
-    function callback(e) {
-      if (e.code === "Escape") {
-        onCloseMovie();
-      }
-    }
-
-    document.addEventListener("keydown", callback);
-
-    return function () {
-      document.removeEventListener("keydown", callback);
-    };
-  }, [onCloseMovie]);
 
   return (
     <div className="details">

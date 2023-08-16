@@ -1,25 +1,15 @@
 import { useEffect, useRef } from "react";
+import { useKey } from "../../hooks/useKey";
 
 export default function SearchBar({ query, setQuery, onChange }) {
-    //useRef é um hook muito usado para selecionar elementos da DOM, por exemplo aqui, selecionado o barra de pesquisa, para que alguns efeitos ocorram nela, é possivel fazer essa seleção de somente usando JS, mas não é o recomendado pelo React.
+  //useRef é um hook muito usado para selecionar elementos da DOM, por exemplo aqui, selecionado o barra de pesquisa, para que alguns efeitos ocorram nela, é possivel fazer essa seleção de somente usando JS, mas não é o recomendado pelo React.
   const inputEl = useRef(null);
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-
-        if (e.code === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-      return () => document.addEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
+  useKey("Enter", function () {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
