@@ -28,24 +28,24 @@ Quando se tem um componente que tenha muitos estados nele, é mais facil central
 ## Quando usar o useReducer?
 Perguntando essas questões fica mais fácil de entender quando usar cada um desses hooks
 
-               Preciso de só um pedaço de estado? 
+              Preciso de só um pedaço de estado? 
                   SIM -> useState()    NÃO
                                         |
                                         |
                 Esses estados frequentemente se atualizam juntos?
-                            SIM                        NÃO
-                             |                          |
-Esta disposto a escrever um codigo mais complexo?       |
-    SIM -> useReducer()     NÃO -> useState()           |
-                                                        |
-                        Tem 3, 4 ou mais estados relacionados, incluindo objetos?
-                                    SIM                                    NÃO
-                                     |                                      |
-                Esta disposto a escrever um codigo mais complexo?           |
-                    SIM -> useReducer()     NÃO -> useState()               |
-                                                                            |
-                                Muitos event handlers deixando os componentes grandes e confusos?
-                                                SIM                 NÃO -> useState()
-                                                 |
-                        Esta disposto a escrever um codigo mais complexo?         
-                            SIM -> useReducer()     NÃO -> useState() 
+                            SIM                            NÃO
+                             |                              |  
+    Esta disposto a escrever um codigo mais complexo?       |
+        SIM -> useReducer()     NÃO -> useState()           |
+                                                            |
+                            Tem 3, 4 ou mais estados relacionados, incluindo objetos?
+                                        SIM                                    NÃO
+                                         |                                      |
+                    Esta disposto a escrever um codigo mais complexo?           |
+                        SIM -> useReducer()     NÃO -> useState()               |
+                                                                                |
+                                    Muitos event handlers deixando os componentes grandes e confusos?
+                                                    SIM                 NÃO -> useState()
+                                                     |
+                            Esta disposto a escrever um codigo mais complexo?         
+                                SIM -> useReducer()     NÃO -> useState() 
