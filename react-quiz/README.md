@@ -7,3 +7,45 @@ Para chamar essa função se usa o dispatch dentro de alguma outra função dent
 ## Por que usar?
 
 Quando se tem um componente que tenha muitos estados nele, é mais facil centralizar toda a lógica de tratamento desses estados em uma unica função, a **Reducer**. Ela tira a lógica do componente, isola em uma unica função, deixando ele mais fácil de ler e entender.
+
+
+## useReducer X useState
+
+- **useReducer** 
+ - Ideal quando tiverem multiplos estados e grande complexidade
+ - A lógica do estado fica em um único lugar fora dos componentes, a *func reducer* 
+ - Mudança de estado declarativa, as mudanças são mapeadas por nome nas actions, mudança de multiplos estados ao mesmo tempo escrever somente *dispatch({type: "x"})*
+ - Pode ser um pouco confusa de entender e implementar
+
+- **useReducer**: 
+ - Ideal quando tiverem estados independetes e únicos
+ - Lógica para atualizar os estados esta nos event handlers ou effects, espalhadas por um ou vários componentes
+ - Estado somente é atualizado por um func setter, retornado do useState -> *setState()*
+ - Mudança de estado imperativa, tendo que declarar cada *set* usado
+ - Fácil de entender e implementar
+
+
+## Quando usar o useReducer?
+Perguntando essas questões fica mais fácil de entender quando usar cada um desses hooks
+
+               Preciso de só um pedaço de estado? 
+                  SIM -> useState()    NÃO
+                                        |
+                                        |
+                Esses estados frequentemente se atualizam juntos?
+                            SIM                        NÃO
+                             |                          |
+Esta disposto a escrever um codigo mais complexo?       |
+    SIM -> useReducer()     NÃO -> useState()           |
+                                                        |
+                        Tem 3, 4 ou mais estados relacionados, incluindo objetos?
+                                    SIM                                    NÃO
+                                     |                                      |
+                Esta disposto a escrever um codigo mais complexo?           |
+                    SIM -> useReducer()     NÃO -> useState()               |
+                                                                            |
+                                Muitos event handlers deixando os componentes grandes e confusos?
+                                                SIM                 NÃO -> useState()
+                                                 |
+                        Esta disposto a escrever um codigo mais complexo?         
+                            SIM -> useReducer()     NÃO -> useState() 
