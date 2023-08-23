@@ -8,6 +8,12 @@ Aplicações que rodam somente no client side, as routes são responsaveís por 
 
 ### _Usuário clica no router link -> URL muda -> DOM é atualizado_
 
+### Nested Routes
+
+Ex: www.site.com/rota/**nestedRoute**
+Nested Routes são rotas que estão dentro de uma outra rota. Para setar uma nested route, é preciso escrever dentro da route pai as routes filhas, parecido com o children. Para receber essa nested route, é preciso usar o <Outlet/> dentro do componente que recebe essas rotas. Para setar uma nested route ou qualquer route como padrão, usa-se o index prop na declaração da route.
+Exemplos disso estão no App.jsx e AppLayout.jsx
+
 <hr/>
 
 ## Tipos de estilização no React
