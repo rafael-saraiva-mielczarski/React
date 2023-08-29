@@ -24,15 +24,19 @@ Nesse app o fluxo é o seguinte:
 `useSearchParams` é outro hook do React-Router, quando construimos uma URL personalizada, podemos inserir os dados que achamos válido para o caso de uso, exemplo: `${id}?lat=${position.lat}&lng=${position.lng}`.
 Usando o useSearchParams, é possivel procurar por dados através da URL, com um useSearchParams.get(nome do dado a ser buscado na URL, lat ou lng), podendo usar esses dados da maneira que quiser na aplicação.
 
+### useNavigate
+
+`useNavigate` é outro hook do React-Router, ele permite que ocorra uma navegação para qualquer routa após algum evento ou funcão ser executada. Só é necessario instaciar esse hook, normalmente numa const navigate, e chamar ela passando a rota deseja `navigate("home")`.
+
 <hr/>
 
 ## Tipos de estilização no React
 
-    Opção de Estilização        Aonde               Como            Escopo       Baseado em
-    Inline CSS               JSX Element          Style prop       JXS local        CSS
-    CSS ou SASS            Arquivo Externo      Classname prop     Todo app         CSS
-    CSS Modules         Um file por Component   Classname prop     Componente       CSS
-    CSS-IN-JS 💅         Arq ex ou Comp file    Cria novo Comp     Componente    JavaScript
-    Utility-first CSS        JSX Element        Classname prop     JSX element      CSS
+    Opção de Estilização            Aonde                   Como                Escopo          Baseado em
+    Inline CSS                   JSX Element              Style prop          JXS local            CSS
+    CSS ou SASS                Arquivo Externo          Classname prop         Todo app            CSS
+    CSS Modules             Um file por Component       Classname prop        Componente           CSS
+    CSS-IN-JS 💅            Arq ex ou Comp file         Cria novo Comp        Componente        JavaScript
+    Utility-first CSS            JSX Element            Classname prop        JSX element          CSS
 
     Alternativo para não escrever CSS pode ser uma Lib UI: MUI, Chakra UI, Mantine
