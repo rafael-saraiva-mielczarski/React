@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCities } from "../contexts/CitiesContext";
 import styles from "./City.module.css";
 import { useParams } from "react-router-dom";
@@ -26,11 +26,15 @@ export default function City() {
   const { id } = useParams();
   const { currentCity, getCity, isLoading } = useCities();
   const { cityName, emoji, date, notes } = currentCity;
+  const [isCurrentCityStale, setIsCurrentCityStale] = useState(true);
 
   useEffect(() => {
     getCity(id);
+    setIsCurrentCityStale(false);
+    return () => setIsCurrentCityStale(true);
   }, [id]);
 
+  if (isCurrentCityStale) return;
   if (isLoading) return <Spinner />;
 
   return (
