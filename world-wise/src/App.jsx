@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { CitiesProvider } from "../contexts/CitiesContext.jsx";
+import { CitiesProvider } from "./contexts/CitiesContext";
 
 import City from "./components/City";
 import CityList from "./components/CityList";
