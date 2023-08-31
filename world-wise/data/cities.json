@@ -25,16 +25,28 @@
       "id": 17806751
     },
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
+      "cityName": "Camaqua",
+      "countryName": "Brazil",
+      "date": "2023-08-31T18:02:07.282Z",
+      "notes": "ta",
+      "emoji": "🇧🇷",
       "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
+        "lat": "-31.05293398570515",
+        "lng": "-51.67968750000001"
       },
-      "id": 98443197
+      "id": 98443198
+    },
+    {
+      "cityName": "Paris",
+      "countryName": "France",
+      "date": "2023-08-31T18:14:48.881Z",
+      "notes": "magico",
+      "emoji": "🇫🇷",
+      "position": {
+        "lat": "48.8378838608019",
+        "lng": "2.3565673828125"
+      },
+      "id": 98443199
     }
   ]
 }

@@ -70,7 +70,7 @@ export default function City() {
       </div>
 
       <div>
-        <ButtonBack />
+        <ButtonBack navRoute={-1} />
       </div>
     </div>
   );
