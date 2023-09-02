@@ -40,3 +40,8 @@ Usando o useSearchParams, é possivel procurar por dados através da URL, com um
     Utility-first CSS            JSX Element            Classname prop        JSX element          CSS
 
     Alternativo para não escrever CSS pode ser uma Lib UI: MUI, Chakra UI, Mantine
+
+
+## useReducer com ContextAPI
+
+Combinar esses dois metódos é algo comum, porém existem exceções. Não se pode lidar com requisições HTTP dentro do reducer, para isso, mantemos as funçãos de requisição HTTP e dentro delas lidamos com o tratamento desse estados através da função reducer. *Só colocar dentro da reducer os event handlers, quando o click é disparado devemos fazer o dispatch de tal caso, setar os isLoading, adicionar o dado da requisição para X variavel e lidar com erros.*
