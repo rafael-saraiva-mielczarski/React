@@ -1,14 +1,20 @@
 //deprecated, tem uma forma mais moderna
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
 
-const initialState = {
+const initialStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
 };
 
+const initialStateCustomer = {
+  fullName: "",
+  nationalID: "",
+  createdAt: "",
+};
+
 //Diferença de um useReducer normal e um reducer com Redux é que normalmente se passa o state como o estado Inicial setado no código
-function reducer(state = initialState, action) {
+function accountReducer(state = initialStateAccount, action) {
   switch (action.type) {
     //o action name tem como padrão ser escrito primeiramente o dominio do estado e depois sua ação
     case "account/deposit":
@@ -36,9 +42,34 @@ function reducer(state = initialState, action) {
   }
 }
 
-//criando o store é só chamar o metodo createStore e passar o reducer que quiser dentro
-const store = createStore(reducer);
+function customerReducer(state = initialStateCustomer, action) {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+        nationalID: action.payload.nationalID,
+        createdAt: action.payload.createdAt,
+      };
+    case "customer/updateName":
+      return {
+        ...state,
+        fullName: action.payload,
+      };
+    default:
+      return state;
+  }
+}
 
+//Para usar as diferentes funções reducer que criamos, é necessário criar varias stores, mas não é bem assim que funciona com Redux.
+// No Redux, chamamos a função combineReducers, que recebe um objeto, esse objeto serãos os stores criados, o objeto vai receber o nome que queremos dar para cada store e seu reducer
+const rootReducer = combineReducers({
+  account: accountReducer,
+  customer: customerReducer,
+});
+
+//criando o store é só chamar o metodo createStore e passar o reducer que quiser dentro
+const store = createStore(rootReducer);
 //chamamos o dispatch diretamente do store
 // store.dispatch({ type: "account/deposit", payload: 500 });
 // console.log(store.getState());
@@ -86,4 +117,23 @@ store.dispatch(requestLoan(500, "Buy a Bike"));
 console.log(store.getState());
 
 store.dispatch(payLoan());
+console.log(store.getState());
+
+// Customer Action Functions
+
+function createCustomer(fullName, nationalID) {
+  return {
+    type: "customer/createCustomer",
+    payload: { fullName, nationalID, createdAt: new Date().toISOString() },
+  };
+}
+
+function updateName(fullName) {
+  return { type: "customer/updateName", payload: fullName };
+}
+
+store.dispatch(createCustomer("Rafael", "121212"));
+console.log(store.getState());
+
+store.dispatch(updateName("Rafael Saraiva"));
 console.log(store.getState());
