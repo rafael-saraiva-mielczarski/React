@@ -23,3 +23,27 @@ Com Redux, criando um arquivo chamado **(nome da feature)Slice** e nele passamos
 Por convenção, o reducer é exportado como default e as actions functions somente exportadas.
 
 Então, dentro do arquivo **Store** teremos a combinação dos dois reducers criando o RootReducer e passando ele como argumento para o Global Store, que depois é exportado para ser acessivel em todas as partes da aplicação.
+
+## Como usar o estado na aplicação?
+
+Para ter acesso aos dados do store, fazemos algo bem parecido com o ContextAPI:
+
+- Primeiramente instala-se o `react-redux`
+- Importa o store da sua aplicação e o Provider do react-redux, tudo isso dentro do arquivo App
+- Chama a tag `<Provider>` em volta da tag `<App>` e chama o prop _store_ passando o store da aplicação nele.
+- Pronto, agora é só usar o store nos componentes que precisa
+
+## Como selecionar o estado e o dispatch do Store nos seus componentes?
+
+Para ter acesso aos dados e o dispatch devemos seguir esses passos:
+
+- Quando se quer utilizar algum estado, é necessário chamar o `useSelector()` hook fornecido pelo react-redux.
+- O `useSelector()` necessita de uma callback function, normalmente se faz assim `useSelector(store => store.x)` também é comum ver usar _state_ invés de store
+- O `store.x` é referente ao **nome do store** que foi dado no _RootReducer_, nesse caso temos: account e customer
+- Feito isso, atribua esse valor do `store.nomeDoStore.valor` a uma variavel, para que se possa inserir onde quiser.
+
+### Dispatch action
+
+- Precisa chamar o `useDispatch()` hook fornecido pelo react-redux
+- Depois é só chamar o dispatch e especificar a action que deseja
+- Lembrando das Action function que criamos, você vai ter que importar as que forem ser usadas também
