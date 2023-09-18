@@ -47,3 +47,13 @@ Para ter acesso aos dados e o dispatch devemos seguir esses passos:
 - Precisa chamar o `useDispatch()` hook fornecido pelo react-redux
 - Depois é só chamar o dispatch e especificar a action que deseja
 - Lembrando das Action function que criamos, você vai ter que importar as que forem ser usadas também
+
+## Redux Middleware
+
+Como fazer requisições para uma API no Redux?
+
+Componente --> Dispatch --> _Middleware_ --> Store
+
+**Middleware** é uma função que fica entre o dispatch de uma ação e o store com os reducers, ela roda o código depois da ação ser dispatched e antes dela chegar no reducer. É o lugar perfeito para fazer qualquer side effect na aplicação.
+
+**Thunks** é o middleware para chamadas de API mais usado no Redux.
