@@ -57,3 +57,15 @@ Componente --> Dispatch --> _Middleware_ --> Store
 **Middleware** é uma função que fica entre o dispatch de uma ação e o store com os reducers, ela roda o código depois da ação ser dispatched e antes dela chegar no reducer. É o lugar perfeito para fazer qualquer side effect na aplicação.
 
 **Thunks** é o middleware para chamadas de API mais usado no Redux.
+
+<hr/>
+
+# Redux Toolkit
+
+- É o jeito moderno de escrever e usar o Redux
+- Opinativo, forçando a comunidade a escrever Redux com boas práticas
+- Totalmente compativel com o Redux clássico, podendo usar os dois em uma aplicação
+- Menos código "Boilerplate", precisa escrever menos para ter o mesmo resultado
+- Possibilita escrever código que "altera" o estado dentro do reducer
+- Action creaters são criados automaticamente
+- Faz o setup automaticamente do Thunk e do Redux Devtools
